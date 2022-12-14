@@ -33,8 +33,16 @@ Route::put(
     [\App\Http\Controllers\PostsController::class, 'cambiarEstado']
 );
 Route::get(
-    '/misposts/',
+    '/misposts',
     [\App\Http\Controllers\PostsController::class, 'listMine']
+);
+Route::get(
+    '/posts/{id}',
+    [\App\Http\Controllers\PostsController::class, 'Show']
+);
+Route::delete(
+    '/posts/destroy',
+    [\App\Http\Controllers\PostsController::class, 'destroy']
 );
 Route::get('/users/firmas', [
     \App\Http\Controllers\UsersController::class,
@@ -44,3 +52,11 @@ Route::resource(
     'posts',
     \App\Http\Controllers\PostsController::class
 );
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
+    Route::get('me', 'me');
+});

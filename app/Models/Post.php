@@ -22,6 +22,6 @@ class Post extends Model
     }
     public function firmas()
     {
-        return $this->belongsToMany(User::class, 'peticione_user');
+        return $this->belongsToMany(User::class, 'post_user');
     }
 }

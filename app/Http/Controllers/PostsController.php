@@ -13,6 +13,14 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function list(Request $request)
+    {
+        $peticiones = Post::jsonPaginate();
+        return response()->json(['message' => 'Estas son todas las peticiones paginadas', 'data' => $peticiones], 200);
+    }
+     
     public function index(Request $request)
     {
         $peticiones = Post::all();
@@ -70,7 +78,7 @@ class PostsController extends Controller
     {
         $peticion = Post::findOrFail($id);
         //$user = Auth::user();
-        $user = 2;
+        $user = 1;
         $user_id = [$user];
         //$user_id = [$user->id];
         $peticion->firmas()->attach($user_id);
@@ -82,11 +90,10 @@ class PostsController extends Controller
         $peticion->estado = 'aceptada';
         $peticion->save();
         return response()->json(['message' => 'Esta es la peticion que cambio de estado', 'data' => $peticion], 200);
-
     }
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request)
     {
-        $peticion = Post::findOrFail($id);
+        $peticion = Post::findOrFail($request->postid);
         $peticion->delete();
         return response()->json(['message' => 'Esta es la peticion borrada', 'data' => $peticion], 200);
     }
@@ -115,5 +122,4 @@ class PostsController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-
 }
