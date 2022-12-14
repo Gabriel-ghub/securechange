@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string('titulo', 255);
+            $table->text('descripcion');
+            $table->text('destinatario');
+            $table->integer('firmantes');
+            $table->enum('estado', ['aceptada', 'pendiente']);
+            $table->foreignId('user_id');
+            $table->foreignId('category_id');
+            $table->string('image', 255,);
             $table->timestamps();
         });
     }
