@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -103,6 +104,13 @@ class PostsController extends Controller
         $peticion->firmantes = 0;
         $peticion->estado = 'pendiente';
         $peticion->save();
+
+        $file = new File();
+        $file->name= $nombre;
+        $file->post_id = $peticion->id;
+        $file->file_path= $ruta;
+        $file->post()->associate($peticion);
+
         return response()->json(['message' => 'Esta es la peticion que acabas de guardar', 'data' => $peticion], 200);
     }
 

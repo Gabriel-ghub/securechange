@@ -10,10 +10,10 @@ class File extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'peticione_id',
+        'post_id',
         'file_path',
     ];
-    public function peticion()
+    public function post()
     {
         return $this->belongsTo(Post::class);
     }
