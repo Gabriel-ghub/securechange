@@ -10,15 +10,15 @@ class Post extends Model
     use HasFactory;
     protected $fillable = [
         'titulo', 'descripcion', 'destinatario',
-        'firmantes', 'estado'
+        'firmantes', 'estado','image'
     ];
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function categoria()
+    public function category()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Category::class);
     }
     public function firmas()
     {

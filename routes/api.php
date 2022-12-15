@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 Route::get(
     '/posts/listado',
     [\App\Http\Controllers\PostsController::class, 'list']
+);
+Route::post(
+    '/posts/addpost',
+    [\App\Http\Controllers\PostsController::class, 'store']
 );
 Route::get(
     '/posts/firmar/{id}',

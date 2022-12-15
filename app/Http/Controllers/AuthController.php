@@ -43,7 +43,7 @@ wrong.',
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => env('JWT_SECRET') * 60,
+            'expires_in' => env('JWT_TTL') * 60,
             'user' => $user,
         ]);
     }
