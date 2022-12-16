@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ *  @OA\Info(title="API changeORG", version="1.0")
+ */
+
 
 class PostsController extends Controller
 {
@@ -17,11 +21,26 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['index', 'show']]);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/posts/listado",
+     *     summary="Listar Peticiones",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Mostrar todos los usuarios."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * )
+     */
     public function list(Request $request)
     {
         $peticiones = Post::jsonPaginate();
@@ -70,7 +89,7 @@ class PostsController extends Controller
                 'descripcion' => 'required',
                 'destinatario' => 'required',
                 'category_id' => 'required',
-                //'file' => 'required',
+                'file' => 'required',
             ]
         );
         if ($validator->fails()) {
@@ -110,6 +129,7 @@ class PostsController extends Controller
         $file->post_id = $peticion->id;
         $file->file_path= $ruta;
         $file->post()->associate($peticion);
+        $file->save();
 
         return response()->json(['message' => 'Esta es la peticion que acabas de guardar', 'data' => $peticion], 200);
     }

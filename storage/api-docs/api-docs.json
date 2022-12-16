@@ -1,0 +1,23 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API changeORG",
+        "version": "1.0"
+    },
+    "paths": {
+        "/posts/listado": {
+            "get": {
+                "summary": "Listar Peticiones",
+                "operationId": "ac766992d726198bbbe448bb4b5e6404",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}
